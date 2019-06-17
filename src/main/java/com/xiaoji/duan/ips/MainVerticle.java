@@ -90,7 +90,7 @@ public class MainVerticle extends AbstractVerticle {
 						if (handler.succeeded()) {
 							HttpResponse<Buffer> resp = handler.result();
 
-							String result = resp.bodyAsString();
+							String result = resp.bodyAsString("GBK");
 
 							int start = result.indexOf("(") + 1;
 							int end = result.lastIndexOf(");");
@@ -149,7 +149,7 @@ public class MainVerticle extends AbstractVerticle {
 					if (handler.succeeded()) {
 						HttpResponse<Buffer> resp = handler.result();
 
-						String result = resp.bodyAsString();
+						String result = resp.bodyAsString("GBK");
 
 						int start = result.indexOf("(") + 1;
 						int end = result.lastIndexOf(");");
@@ -220,4 +220,5 @@ public class MainVerticle extends AbstractVerticle {
 				});
 
 	}
+	
 }
