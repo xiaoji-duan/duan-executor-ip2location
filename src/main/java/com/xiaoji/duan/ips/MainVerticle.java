@@ -75,7 +75,7 @@ public class MainVerticle extends AbstractVerticle {
 			if (findOne.succeeded()) {
 				JsonObject cached = findOne.result();
 
-				if (!cached.isEmpty()) {
+				if (cached != null && !cached.isEmpty()) {
 					JsonObject nextctx = new JsonObject().put("context",
 							new JsonObject().put("ip", ip).put("location", cached));
 
@@ -92,7 +92,23 @@ public class MainVerticle extends AbstractVerticle {
 
 							String result = resp.bodyAsString();
 
-							String jsonstring = result.substring(result.indexOf("(") + 1, result.indexOf(""));
+							int start = result.indexOf("(") + 1;
+							int end = result.lastIndexOf(");");
+							
+							//未返回正确的内容
+							if (end <= start) {
+								JsonObject nextctx = new JsonObject().put("context", new JsonObject().put("ip", ip)
+										.put("location", new JsonObject()));
+
+								MessageProducer<JsonObject> producer = bridge.createProducer(nextTask);
+								producer.send(new JsonObject().put("body", nextctx));
+								System.out.println("Consumer " + consumer + " send to [" + nextTask + "] result ["
+										+ nextctx.encode() + "]");
+								
+								return;
+							}
+							
+							String jsonstring = result.substring(start, end);
 
 							JsonObject location = new JsonObject();
 
@@ -135,7 +151,23 @@ public class MainVerticle extends AbstractVerticle {
 
 						String result = resp.bodyAsString();
 
-						String jsonstring = result.substring(result.indexOf("(") + 1, result.indexOf(""));
+						int start = result.indexOf("(") + 1;
+						int end = result.lastIndexOf(");");
+						
+						//未返回正确的内容
+						if (end <= start) {
+							JsonObject nextctx = new JsonObject().put("context", new JsonObject().put("ip", ip)
+									.put("location", new JsonObject()));
+
+							MessageProducer<JsonObject> producer = bridge.createProducer(nextTask);
+							producer.send(new JsonObject().put("body", nextctx));
+							System.out.println("Consumer " + consumer + " send to [" + nextTask + "] result ["
+									+ nextctx.encode() + "]");
+							
+							return;
+						}
+						
+						String jsonstring = result.substring(start, end);
 
 						JsonObject location = new JsonObject();
 
