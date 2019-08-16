@@ -81,6 +81,7 @@ public class MainVerticle extends AbstractVerticle {
 
 					MessageProducer<JsonObject> producer = bridge.createProducer(nextTask);
 					producer.send(new JsonObject().put("body", nextctx));
+					producer.end();
 					System.out.println(
 							"Consumer " + consumer + " send to [" + nextTask + "] result [" + nextctx.encode() + "]");
 
@@ -102,6 +103,7 @@ public class MainVerticle extends AbstractVerticle {
 
 								MessageProducer<JsonObject> producer = bridge.createProducer(nextTask);
 								producer.send(new JsonObject().put("body", nextctx));
+								producer.end();
 								System.out.println("Consumer " + consumer + " send to [" + nextTask + "] result ["
 										+ nextctx.encode() + "]");
 								
@@ -126,6 +128,7 @@ public class MainVerticle extends AbstractVerticle {
 
 							MessageProducer<JsonObject> producer = bridge.createProducer(nextTask);
 							producer.send(new JsonObject().put("body", nextctx));
+							producer.end();
 							System.out.println("Consumer " + consumer + " send to [" + nextTask + "] result ["
 									+ nextctx.encode() + "]");
 
@@ -136,6 +139,7 @@ public class MainVerticle extends AbstractVerticle {
 
 							MessageProducer<JsonObject> producer = bridge.createProducer(nextTask);
 							producer.send(new JsonObject().put("body", nextctx));
+							producer.end();
 							System.out.println("Consumer " + consumer + " send to [" + nextTask + "] result ["
 									+ nextctx.encode() + "]");
 						}
@@ -161,6 +165,7 @@ public class MainVerticle extends AbstractVerticle {
 
 							MessageProducer<JsonObject> producer = bridge.createProducer(nextTask);
 							producer.send(new JsonObject().put("body", nextctx));
+							producer.end();
 							System.out.println("Consumer " + consumer + " send to [" + nextTask + "] result ["
 									+ nextctx.encode() + "]");
 							
@@ -185,6 +190,7 @@ public class MainVerticle extends AbstractVerticle {
 
 						MessageProducer<JsonObject> producer = bridge.createProducer(nextTask);
 						producer.send(new JsonObject().put("body", nextctx));
+						producer.end();
 						System.out.println("Consumer " + consumer + " send to [" + nextTask + "] result ["
 								+ nextctx.encode() + "]");
 
@@ -195,6 +201,7 @@ public class MainVerticle extends AbstractVerticle {
 
 						MessageProducer<JsonObject> producer = bridge.createProducer(nextTask);
 						producer.send(new JsonObject().put("body", nextctx));
+						producer.end();
 						System.out.println("Consumer " + consumer + " send to [" + nextTask + "] result ["
 								+ nextctx.encode() + "]");
 					}
